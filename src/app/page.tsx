@@ -1,3 +1,4 @@
+import AuthBtn from '@/components/common/auth-btn'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 
@@ -7,13 +8,14 @@ const Home = async () => {
 
   return (
     <>
-      <div className='container w-full text-center'>
+      <div className='flex min-h-screen flex-col items-center justify-center p-24'>
         <h1>Welcome To X clone!</h1>
-        <pre>
+        <AuthBtn />
+        <main className=''>
           {
             JSON.stringify(posts, null, 2)
           }
-        </pre>
+        </main>
       </div>
     </>
   )
