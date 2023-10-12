@@ -25,7 +25,7 @@ const AuthBtn = () => {
         <GitHubIcon />
         Sign in with Github
       </button>
-      <button onClick={handleSignOut}>Sign Out</button>
+      <button onClick={handleSignOut}>Sign Out!</button>
     </header>
   )
 }
