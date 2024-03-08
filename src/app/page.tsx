@@ -14,19 +14,19 @@ export default async function Home () {
     redirect('/login')
   }
 
-  const { data: posts } = await supabase.from('posts').select('*')
+  const { data: posts } = await supabase.from('posts').select('auth.users(email)')
 
   return (
     <>
-      <div className='flex min-h-screen flex-col items-center justify-center p-24'>
+      <main className='flex min-h-screen flex-col items-center justify-center p-24'>
         <h1>Welcome to X clone!</h1>
         <AuthBtnServer />
-        <main>
+        <pre className='mt-10'>
           {
             JSON.stringify(posts, null, 2)
           }
-        </main>
-      </div>
+        </pre>
+      </main>
     </>
   )
 }
