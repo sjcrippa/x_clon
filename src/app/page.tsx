@@ -14,7 +14,9 @@ export default async function Home () {
     redirect('/login')
   }
 
-  const { data: posts } = await supabase.from('posts').select('auth.users(email)')
+  const { data: posts } = await supabase
+    .from('posts')
+    .select('*, users(name, avatar_url, user_name)')
 
   return (
     <>
