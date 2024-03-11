@@ -24,7 +24,7 @@ export function AuthBtn ({ session }: { session: Session | null }) {
   }
 
   return (
-    <header className='flex justify-center'>
+    <header className='flex justify-center mb-5'>
       {
         session === null
           ? (
