@@ -39,6 +39,7 @@ export function AuthBtn ({ session }: { session: Session | null }) {
             </button>
             )
           : <Button
+              className='mt-5'
               onClick={handleSignOut}
               >Sign Out
             </Button>
