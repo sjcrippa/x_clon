@@ -3,11 +3,13 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 import { AuthBtnServer } from '@/components/common/auth-btn-server'
-import { PostList } from '@/components/post-list'
+import { PostList } from '@/components/home/post-list'
+import { type Database } from '@/types/database'
+import { type Post } from '@/types/posts'
 
 export default async function Home () {
   // como es un server-component, podemos acceder a datos como las cookies u las necesitamos para que supabase sepa si el user esta logeado, entre otras cosas.
-  const supabase = createServerComponentClient({ cookies })
+  const supabase = createServerComponentClient<Database>({ cookies })
   const { data: { session } } = await supabase.auth.getSession()
 
   // lo de abajo permite lo siguiente: si un usuario que no se encuentre logeado, intenta ir a la home, este sera dirigido obligatoriamiente al login para que se registre primero.
@@ -25,7 +27,7 @@ export default async function Home () {
 
         <section className='max-w-[600px] mx-auto border-l border-r border-white/30 min-h-screen'>
           <AuthBtnServer />
-          <PostList posts={posts} />
+            <PostList posts={posts as Post[]} />
         </section>
 
       </main>
