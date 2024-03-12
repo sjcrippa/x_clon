@@ -4,6 +4,8 @@ import { redirect } from 'next/navigation'
 
 import { AuthBtnServer } from '@/components/common/auth-btn-server'
 import { PostList } from '@/components/home/post-list'
+import { ComposePost } from '@/components/home/compose-post'
+
 import { type Database } from '@/types/database'
 import { type Post } from '@/types/posts'
 
@@ -20,16 +22,16 @@ export default async function Home () {
   const { data: posts } = await supabase
     .from('posts')
     .select('*, user:users(name, avatar_url, user_name)')
+    .order('created_at', { ascending: false }) // para que los posts aparezcan del mas reciente al mas antiguo
 
   return (
     <>
       <main className='flex min-h-screen flex-col items-center justify-center'>
-
-        <section className='max-w-[600px] mx-auto border-l border-r border-white/30 min-h-screen'>
-          <AuthBtnServer />
-            <PostList posts={posts as Post[]} />
+        <section className='max-w-[800px] w-full mx-auto border-l border-r border-white/30 min-h-screen'>
+          <ComposePost userAvatarUrl={session.user?.user_metadata?.avatar_url} />
+          <PostList posts={posts as Post[]} />
         </section>
-
+        <AuthBtnServer />
       </main>
     </>
   )
